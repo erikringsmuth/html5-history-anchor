@@ -1,4 +1,6 @@
-## Extend the `<a>` tag with the `window.history` API
+## &lt;a is="html5-history-anchor"&gt;
+> Extend the `<a>` tag with the `window.history` API
+>
 > [HTML5 history spec](http://www.w3.org/html/wg/drafts/html/master/browsers.html#the-history-interface)
 
 The `<a>` tag you know and love.
@@ -8,10 +10,11 @@ The `<a>` tag you know and love.
 
 Extended with the HTML5 `window.history` API.
 ```html
-<a is="html5-history-anchor" href="/link" pushstate go title="New Title" state='{"message":"New State!"}'>/link</a>
+<a is="html5-history-anchor" href="/link"
+   pushstate go title="New Title" state='{"message":"New State!"}'>/link</a>
 ```
 
-This uses the HTML5 history API underneath.
+Clicking this link calls the HTML5 history API.
 ```js
 history.pushState({message:'New State!'}, 'New Title', '/link');
 history.go(0);
@@ -34,7 +37,8 @@ The API is a direct extension of the `<a>` tag and `window.history`. Examples:
 
 Call `history.replaceState({message:'Replaced State!'}, null, '/new-state')`.
 ```html
-<a is="html5-history-anchor" replacestate href="/new-state" state='{"message":"Replaced State!"}'>/new-state</a>
+<a is="html5-history-anchor" href="/new-state"
+   replacestate state='{"message":"Replaced State!"}'>/new-state</a>
 ```
 
 Call `history.back()`.
@@ -58,7 +62,13 @@ Refresh the page with `history.go(0)`.
 ```
 
 ## Notes
-The [HTML5 history spec](http://www.w3.org/html/wg/drafts/html/master/browsers.html#the-history-interface) isn't what most people expect. `history.pushState()` doesn't change the page. It was only meant to push state into history. This is an "undo" feature for single page applications. You can force a page load with `history.go(0)` but this also has it's quirks. It doesn't fire a `popstate` event. Instead `go()` does a full page load. Neither `pushState()` or `replaceState()` trigger any events. On the other hand, the browser's back and forward buttons fire `popstate` events. 
+The [HTML5 history spec](http://www.w3.org/html/wg/drafts/html/master/browsers.html#the-history-interface) is quirky.
+
+`history.pushState()` doesn't load a new page or fire a `popstate` event. It was only meant to push state into history. This is an "undo" feature for single page applications.
+
+You can force a page load with `history.go(0)` but this does a full page load rather than firing a `popstate` event.
+
+The browser's back and forward buttons fire `popstate` events.
 
 ## Build, Test, and Debug [![Build Status](https://travis-ci.org/erikringsmuth/html5-history-anchor.png?branch=master)](https://travis-ci.org/erikringsmuth/html5-history-anchor)
 Source files are under the `src` folder. The build process writes to the root directory. The easiest way to debug is to include the source script rather than the minified HTML import.
