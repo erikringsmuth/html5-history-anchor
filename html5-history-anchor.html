@@ -1,0 +1,4 @@
+<!-- Copyright (C) 2014 Erik Ringsmuth - MIT license -->
+<script type="text/javascript">
+!function(){function t(t){if(this.hasAttribute("back"))return window.history.back(),void t.preventDefault();if(this.hasAttribute("forward"))return window.history.forward(),void t.preventDefault();if(this.hasAttribute("pushstate")&&(window.history.pushState(JSON.parse(this.getAttribute("state")),this.getAttribute("title"),this.getAttribute("href")),t.preventDefault()),this.hasAttribute("replacestate")&&(window.history.replaceState(JSON.parse(this.getAttribute("state")),this.getAttribute("title"),this.getAttribute("href")),t.preventDefault()),this.hasAttribute("go")){var e=this.getAttribute("go");e=e?parseInt(e):0,window.history.go(e),t.preventDefault()}}var e=Object.create(HTMLAnchorElement.prototype);e.createdCallback=function(){this.addEventListener("click",t,!1)},document.registerElement("html5-history-anchor",{prototype:e,"extends":"a"})}();
+</script>
