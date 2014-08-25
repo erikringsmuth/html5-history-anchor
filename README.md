@@ -66,8 +66,8 @@ The [HTML5 history spec](http://www.w3.org/html/wg/drafts/html/master/browsers.h
 - `history.pushState()` doesn't load a new page or fire a `popstate` event. It was only meant to push state into history. This is an "undo" feature for single page applications.
 - `history.replaceState()` also doesn't load a new page or fire a `popstate` event.
 - You can force a page load with `history.go(0)` but this does a full page load rather than firing a `popstate` event.
-- The browser's back and forward buttons fire `popstate` events.
-- You probably will get frustrated, it's not the `<a>` tag, it's `window.history`...
+- The browser's back and forward buttons DO fire `popstate` events.
+- The lack of consistency is frustrating, it's not the `<a>` tag, it's `window.history`...
 
 ## Build, Test, and Debug [![Build Status](https://travis-ci.org/erikringsmuth/html5-history-anchor.png?branch=master)](https://travis-ci.org/erikringsmuth/html5-history-anchor)
 Source files are under the `src` folder. The build process writes to the root directory. The easiest way to debug is to include the source script rather than the minified HTML import.
