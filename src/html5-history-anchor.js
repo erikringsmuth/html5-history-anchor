@@ -3,33 +3,20 @@
   // http://www.whatwg.org/specs/web-apps/current-work/multipage/browsers.html#the-history-interface
   //
   // <a is="html5-history-anchor"
+  //   [href="/path"]
   //   [pushstate]
   //   [replacestate]
   //   [back]
   //   [forward]
   //   [go[="0"]]
-  //   href="/path"
   //   [title="New Page Title"]
-  //   [state="{'message':'New State!'}"]>
+  //   [state="{'message':'New State!'}"]
+  //   [popstate]>
   //   title</a>
 
   var HTML5HistoryAnchorElement = Object.create(HTMLAnchorElement.prototype);
 
   function historyAnchorEventListener(event) {
-    // back
-    if (this.hasAttribute('back')) {
-      window.history.back();
-      event.preventDefault();
-      return;
-    }
-
-    // forward
-    if (this.hasAttribute('forward')) {
-      window.history.forward();
-      event.preventDefault();
-      return;
-    }
-
     // pushstate
     if (this.hasAttribute('pushstate')) {
       window.history.pushState(JSON.parse(this.getAttribute('state')), this.getAttribute('title'), this.getAttribute('href'));
@@ -42,6 +29,16 @@
       event.preventDefault();
     }
 
+    // popstate
+    if (this.hasAttribute('popstate')) {
+      window.dispatchEvent(new PopStateEvent('popstate', {
+        bubbles: false,
+        cancelable: false,
+        state: window.history.state
+      }));
+      event.preventDefault();
+    }
+
     // go
     if (this.hasAttribute('go')) {
       var num = this.getAttribute('go');
@@ -51,6 +48,18 @@
         num = 0;
       }
       window.history.go(num);
+      event.preventDefault();
+    }
+
+    // back
+    if (this.hasAttribute('back')) {
+      window.history.back();
+      event.preventDefault();
+    }
+
+    // forward
+    if (this.hasAttribute('forward')) {
+      window.history.forward();
       event.preventDefault();
     }
   }
