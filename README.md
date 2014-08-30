@@ -16,22 +16,20 @@ Extended with the HTML5 `window.history` API.
 
 Clicking this link calls the HTML5 history API.
 ```js
-history.pushState({message:'New State!'}, 'New Title', '/link');
+window.history.pushState({message:'New State!'}, 'New Title', '/link');
 window.dispatchEvent(new PopStateEvent('popstate', {
   bubbles: false,
   cancelable: false,
-  state: window.history.state
+  state: {message:'New State!'}
 }));
 ```
 
-`history.pushState()` doesn't load a new page or fire a `popstate` event. It was only meant to push state into history. This is an "undo" feature for single page applications. This is why you have to manually dispatch a `popstate` event. Including both `pushstate` and `popstate` attributes on the link will push the new state into history then dispatch a `popstate` event which you can use to load a new page with a router or manually.
+`history.pushState()` doesn't dispatch a `popstate` event or load a new page by itself. It was only meant to push state into history. This is an "undo" feature for single page applications. This is why you have to manually dispatch a `popstate` event. Including both `pushstate` and `popstate` attributes on the link will push the new state into history then dispatch a `popstate` event which you can use to load a new page with a router.
 
 ## Install
-```
-bower install html5-history-anchor --save
-```
+[Download](https://github.com/erikringsmuth/html5-history-anchor/archive/master.zip) or run `bower install html5-history-anchor --save`
 
-## Import or Load
+## Import
 ```html
 <link rel="import" href="/bower_components/html5-history-anchor/html5-history-anchor.html">
 or
