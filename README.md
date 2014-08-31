@@ -39,28 +39,28 @@ or
 ## API
 The API is a direct extension of the `<a>` tag and `window.history`. Examples:
 
-Call `history.pushState(null, null, '/new-state')` and dispatch a `popstate` event.
+Push a new state with `history.pushState(null, null, '/new-state')` and dispatch a `popstate` event.
 ```html
 <a is="html5-history-anchor" href="/new-state" pushstate popstate>/new-state</a>
 ```
 
-Call `history.replaceState({message:'Replaced State!'}, null, '/new-state')` but don't `popstate`.
+Replace the current state with `history.replaceState({message:'Replaced State!'}, null, '/new-state')` and don't `popstate`.
 ```html
 <a is="html5-history-anchor" href="/new-state"
    replacestate state='{"message":"Replaced State!"}'>/new-state</a>
 ```
 
-Call `history.back()`.
+Back button with `history.back()`.
 ```html
 <a is="html5-history-anchor" back>Back</a>
 ```
 
-Call `history.forward()`.
+Forward button with `history.forward()`.
 ```html
 <a is="html5-history-anchor" forward>Forward</a>
 ```
 
-Call `history.go(-2)`.
+Back 2 pages with `history.go(-2)`.
 ```html
 <a is="html5-history-anchor" go="-2">Back 2 Pages</a>
 ```
