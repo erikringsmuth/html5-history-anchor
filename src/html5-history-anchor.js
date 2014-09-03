@@ -18,7 +18,7 @@
 
   function historyAnchorEventListener(event) {
     // open in new tab
-    if (event.ctrlKey || event.metaKey) {
+    if (event.ctrlKey || event.metaKey || event.which === 2) {
       return;
     }
 
